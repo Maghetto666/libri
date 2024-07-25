@@ -44,6 +44,7 @@ public class LibroController {
     public Libro getLibroById(@PathVariable String id) {
         Libro libro = libroService.getLibroById(id);
         if (libro == null) {
+            logger.error("Libro non trovato con quell'id");
             throw new LibroNotFoundException("Libro not found with id: " + id);
         }
         return libro;
@@ -75,6 +76,7 @@ public class LibroController {
     ) {
         Libro updatedLibro = libroService.updateUser(id, titolo, autore, anno, numPagine, genere, lingua);
         if (updatedLibro == null) {
+            logger.error("Libro non trovato con quell'id");
             throw new LibroNotFoundException("Libro not found with id: " + id);
         } else {
             return updatedLibro;
@@ -87,6 +89,7 @@ public class LibroController {
     public void deleteLibro(@PathVariable String id) {
         boolean deleted = libroService.deleteLibro(id);
         if (!deleted) {
+            logger.error("Libro non trovato con quell'id");
             throw new LibroNotFoundException("Libro not found with id: " + id);
         }
     }
