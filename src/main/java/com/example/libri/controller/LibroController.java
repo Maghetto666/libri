@@ -41,7 +41,7 @@ public class LibroController {
             @ApiResponse(responseCode = "200", description = "Libro trovato"),
             @ApiResponse(responseCode = "404", description = "Libro non trovato con quell'id")
     })
-    public Libro getLibroById(@PathVariable String id) {
+    public Libro getLibroById(@PathVariable Long id) {
         Libro libro = libroService.getLibroById(id);
         if (libro == null) {
             logger.error("Libro non trovato con quell'id");
@@ -66,7 +66,7 @@ public class LibroController {
     @PutMapping("{id}")
     @Operation(summary = "modifica dettagli libro", description = "modifica i dettagli di un libro trovato tramite id")
     @ApiResponse(responseCode = "200", description = "Libro modificato con successo")
-    public Libro updateLibro(@PathVariable String id,
+    public Libro updateLibro(@PathVariable Long id,
                              @RequestParam String titolo,
                              @RequestParam String autore,
                              @RequestParam int anno,
@@ -86,7 +86,7 @@ public class LibroController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Cancella libro", description = "Cancella libro dal database")
     @ApiResponse(responseCode = "200", description = "Libro cancellato dal database")
-    public void deleteLibro(@PathVariable String id) {
+    public void deleteLibro(@PathVariable Long id) {
         boolean deleted = libroService.deleteLibro(id);
         if (!deleted) {
             logger.error("Libro non trovato con quell'id");

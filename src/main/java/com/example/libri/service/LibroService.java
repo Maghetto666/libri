@@ -18,19 +18,19 @@ public class LibroService {
         return libroRepository.findAll();
     }
 
-    public Libro getLibroById(String id) {
+    public Libro getLibroById(Long id) {
         return libroRepository.findById(id).orElse(null);
     }
 
     public Libro createLibro(String titolo, String autore,
                              int anno, int numPagine,
                              String genere, String lingua) {
-        Libro newLibro = new Libro(UUID.randomUUID().toString(),
+        Libro newLibro = new Libro(null,
                 titolo, autore, anno, numPagine, genere, lingua);
         return libroRepository.save(newLibro);
     }
 
-    public Libro updateUser(String id, String titolo,
+    public Libro updateUser(Long id, String titolo,
                             String autore, int anno,
                             int numPagine, String genere,
                             String lingua) {
@@ -38,7 +38,7 @@ public class LibroService {
         return libroRepository.save(libro);
     }
 
-    public boolean deleteLibro(String id) {
+    public boolean deleteLibro(Long id) {
         Libro user = libroRepository.findById(id).orElse(null);
         if (user != null) {
             libroRepository.deleteById(id);
